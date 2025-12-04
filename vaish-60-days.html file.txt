@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>60 Reasons & 60 Days Together – For Vaish 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(circle at top, #ffdde1 0%, #ee9ca7 35%, #2b1055 90%);
+      color: #222;
+    }
+
+    .app {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 20px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.28),
+        0 0 0 1px rgba(255, 255, 255, 0.4);
+      padding: 24px 22px 26px;
+      backdrop-filter: blur(12px);
+    }
+
+    @media (min-width: 720px) {
+      .app {
+        padding: 32px 34px 34px;
+      }
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.75;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #ffe5ec;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #b3204b;
+      white-space: nowrap;
+    }
+
+    .pill span.heart {
+      font-size: 1.1rem;
+    }
+
+    .current-reason-card {
+      position: relative;
+      border-radius: 16px;
+      padding: 22px 20px 20px;
+      background: linear-gradient(135deg, #fff7fb, #ffe6f0);
+      overflow: hidden;
+      margin-bottom: 18px;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      box-shadow: 0 12px 30px rgba(255, 143, 178, 0.35);
+    }
+
+    .current-reason-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(255, 143, 178, 0.45);
+    }
+
+    .current-reason-card:active {
+      transform: translateY(1px) scale(0.99);
+      box-shadow: 0 10px 24px rgba(255, 143, 178, 0.3);
+    }
+
+    .current-reason-card::after {
+      content: "for Vaish";
+      position: absolute;
+      bottom: -18px;
+      right: 12px;
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: rgba(255, 182, 193, 0.35);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .tap-hint {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #b3204b;
+      opacity: 0.85;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tap-hint span.small {
+      font-size: 0.78rem;
+      opacity: 0.8;
+    }
+
+    .reason-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: #b3204b;
+      opacity: 0.9;
+    }
+
+    .reason-index {
+      font-weight: 700;
+    }
+
+    .reason-chip {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px dashed rgba(179, 32, 75, 0.5);
+      font-size: 0.8rem;
+    }
+
+    .reason-text {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      min-height: 3.4em;
+    }
+
+    .tap-overlay {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .tap-overlay span.emoji {
+      margin-right: 4px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 6px;
+      margin-top: 6px;
+    }
+
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 9px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+      outline: none;
+    }
+
+    button:active {
+      transform: translateY(1px) scale(0.99);
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: #b3204b;
+      border: 1px solid rgba(179, 32, 75, 0.18);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #555;
+      border: 1px dashed rgba(0, 0, 0, 0.16);
+    }
+
+    .controls-right {
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .all-reasons {
+      border-top: 1px dashed rgba(0, 0, 0, 0.1);
+      padding-top: 12px;
+      margin-top: 10px;
+      max-height: 220px;
+      overflow: auto;
+      scroll-behavior: smooth;
+    }
+
+    @media (min-width: 720px) {
+      .all-reasons {
+        max-height: 260px;
+        padding-top: 16px;
+      }
+    }
+
+    .all-reasons-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.92rem;
+    }
+
+    .all-reasons-header span {
+      opacity: 0.8;
+    }
+
+    ol.reason-list {
+      padding-left: 20px;
+      display: grid;
+      gap: 6px;
+      font-size: 0.92rem;
+    }
+
+    ol.reason-list li {
+      padding-right: 4px;
+      cursor: pointer;
+    }
+
+    ol.reason-list li:hover {
+      text-decoration: underline;
+    }
+
+    /* Celebration section */
+
+    .celebration {
+      margin-top: 22px;
+      border-radius: 18px;
+      padding: 20px 16px 18px;
+      background: radial-gradient(circle at top, #fff5f7 0%, #ffeaf1 40%, #ffe1ff 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .celebration.hidden {
+      display: none;
+    }
+
+    .celebration-title {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .celebration-subtitle {
+      font-size: 0.98rem;
+      opacity: 0.78;
+      margin-bottom: 10px;
+    }
+
+    .balloons-row {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .balloon {
+      display: inline-block;
+      animation: floatUp 4s ease-in-out infinite;
+    }
+
+    .balloon:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    .balloon:nth-child(3) {
+      animation-delay: 1.2s;
+    }
+
+    .balloon:nth-child(4) {
+      animation-delay: 1.8s;
+    }
+
+    .balloon:nth-child(5) {
+      animation-delay: 2.4s;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(6px);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+      100% {
+        transform: translateY(6px);
+      }
+    }
+
+    .confetti {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.55;
+      font-size: 1.4rem;
+    }
+
+    .confetti span {
+      position: absolute;
+      animation: confettiFall 5s linear infinite;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-10px) rotate(0deg);
+      }
+      100% {
+        transform: translateY(220px) rotate(360deg);
+      }
+    }
+
+    .from-note {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    footer {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      text-align: right;
+      opacity: 0.7;
+    }
+
+    footer strong {
+      color: #b3204b;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="title-block">
+        <h1>60 Reasons I Love You, Vaish</h1>
+        <p class="subtitle">Tap to reveal each reason — one for every day we’ve been together. 💕</p>
+      </div>
+      <div class="pill">
+        <span class="heart">♥</span>
+        <span>For Vaish, with love</span>
+      </div>
+    </header>
+
+    <section class="current-reason-card" id="reason-card">
+      <div class="tap-hint">
+        <span>TAP TO REVEAL</span>
+        <span class="small">or tap again for the next reason ➜</span>
+      </div>
+      <div class="reason-meta">
+        <div class="reason-index" id="reason-counter">Ready?</div>
+        <div class="reason-chip">for my Vaish</div>
+      </div>
+      <p class="reason-text" id="reason-text">
+        Tap anywhere on this card to see the first reason. ✨
+      </p>
+      <div class="tap-overlay" id="tap-overlay">
+        <span class="emoji">👆</span> Every tap = one more reason I love you.
+      </div>
+    </section>
+
+    <div class="controls">
+      <button class="btn-secondary" id="restart-btn">
+        🔁 Start again
+      </button>
+      <div class="controls-right">
+        <button class="btn-ghost" id="scroll-list-btn">
+          📜 See full list
+        </button>
+      </div>
+    </div>
+
+    <section class="all-reasons" id="full-list">
+      <div class="all-reasons-header">
+        <span>All 60 reasons in one place.</span>
+        <span>Tap any line to jump to that reason. 💌</span>
+      </div>
+      <ol class="reason-list" id="reason-list">
+        <!-- list injected here -->
+      </ol>
+    </section>
+
+    <!-- Celebration section for 60 days together -->
+    <section class="celebration hidden" id="celebration">
+      <div class="confetti">
+        <span style="left: 8%; animation-duration: 4.2s;">🎊</span>
+        <span style="left: 26%; animation-duration: 5s;">✨</span>
+        <span style="left: 44%; animation-duration: 4.6s;">🎉</span>
+        <span style="left: 64%; animation-duration: 5.3s;">💫</span>
+        <span style="left: 82%; animation-duration: 4.8s;">🎊</span>
+      </div>
+
+      <div class="balloons-row">
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+      </div>
+
+      <div class="celebration-title">
+        Happy 60 Days Together, Vaish! 💖
+      </div>
+      <div class="celebration-subtitle">
+        One reason for every single day with you — and still not enough to explain how much you mean to me.
+      </div>
+
+      <div class="from-note">
+        From your Prakhar, who’s stupid in many things but very sure about <strong>you</strong>. 🫶
+      </div>
+    </section>
+
+    <footer>
+      Made with <strong>love</strong> (and JavaScript) by you for her.
+    </footer>
+  </div>
+
+  <script>
+    const reasons = [
+      I love the way you understand me without me explaining everything.,
+      I love that you care about my feelings.,
+      I love that you don’t pretend—you’re real with me.,
+      I love how you support me even when I doubt myself.,
+      I love that you trust me.,
+      I love how you listen to me patiently.,
+      I love how safe I feel when I talk to you.,
+      I love that you make me want to become a better version of myself.,
+      I love the way you respect relationships.,
+      I love how soft you are with people you love.,
+      I love the way you think and how your mind works.,
+      I love that you try, even when things are hard.,
+      I love how emotional you are—it shows how deeply you care.,
+      I love that you remember small things about me.,
+      I love how you bring peace to my chaos.,
+      I love how your presence feels like comfort.,
+      I love how mature you can be when needed.,
+      I love that you’re not afraid to show your feelings.,
+      I love how loyal you are.,
+      I love how patient you are with me.,
+      I love that you never make me feel alone.,
+      I love how you handle situations calmly.,
+      I love that you try to understand before reacting.,
+      I love how you celebrate my small achievements.,
+      I love how you encourage me when I feel low.,
+      I love that you care about my peace.,
+      I love the way you express love—not loudly, but deeply.,
+      I love how natural everything feels with you.,
+      I love your softness, even when life is harsh.,
+      I love your little jealous moments—they show emotions, not control.,
+      I love that you choose me every day, even with my flaws.,
+      I love how consistent you are with your love.,
+      I love that you’re not perfect—but you’re perfect for me.,
+      I love that you make even normal days feel special.,
+      I love how you forgive and move forward.,
+      I love how you make difficult things feel easier.,
+      I love how you care for animals and people around you.,
+      I love how responsible and sensible you are.,
+      I love that you’re protective in the sweetest way.,
+      I love that you’re strong and soft at the same time.,
+      I love how you speak your heart honestly.,
+      I love how comfortable silence with you feels.,
+      I love that you believe in us.,
+      I love how you never fake emotions.,
+      I love how understanding you are with my flaws and mistakes.,
+      I love that you value respect more than anything.,
+      I love how your energy feels calming, not exhausting.,
+      I love how we can talk about anything—deep or stupid.,
+      I love how proud you make me feel to call you mine.,
+      I love how deeply you love—not half-hearted, but fully.,
+      I love the trust we share.,
+      I love how you make my bad days better with just your presence.,
+      I love how important you make me feel.,
+      I love how our bond feels rare and real.,
+      I love that you inspire me to think differently.,
+      I love how being with you feels like home.,
+      I love that you never gave up on us.,
+      I love the connection we have — something not everyone gets.,
+      I love that with you, I don’t have to pretend.,
+      And most of all — I love you because you’re simply you.
+    ];
+
+    const reasonCard = document.getElementById("reason-card");
+    const reasonTextEl = document.getElementById("reason-text");
+    const reasonCounterEl = document.getElementById("reason-counter");
+    const tapOverlayEl = document.getElementById("tap-overlay");
+    const listEl = document.getElementById("reason-list");
+    const fullListSection = document.getElementById("full-list");
+    const scrollListBtn = document.getElementById("scroll-list-btn");
+    const restartBtn = document.getElementById("restart-btn");
+    const celebrationSection = document.getElementById("celebration");
+
+    let currentIndex = -1; // -1 = not started
+
+    function showCelebration() {
+      celebrationSection.classList.remove("hidden");
+    }
+
+    function hideCelebration() {
+      celebrationSection.classList.add("hidden");
+    }
+
+    function showNextReason() {
+      if (currentIndex < reasons.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+
+      reasonTextEl.textContent = reasons[currentIndex];
+      reasonCounterEl.textContent = Reason ${currentIndex + 1} of ${reasons.length};
+      tapOverlayEl.textContent = currentIndex === reasons.length - 1
+        ? "This is the 60th reason. Scroll down for a small surprise. 🎈"
+        : "Tap again for the next reason. 💗";
+
+      if (currentIndex === reasons.length - 1) {
+        showCelebration();
+      }
+    }
+
+    function jumpToReason(index) {
+      currentIndex = index;
+      reasonTextEl.textContent = reasons[currentIndex];
+      reasonCounterEl.textContent = Reason ${currentIndex + 1} of ${reasons.length};
+      tapOverlayEl.textContent = currentIndex === reasons.length - 1
+        ? "This is the 60th reason. Scroll down for a small surprise. 🎈"
+        : "Tap again for the next reason. 💗";
+
+      if (currentIndex === reasons.length - 1) {
+        showCelebration();
+      }
+    }
+
+    function populateList() {
+      listEl.innerHTML = "";
+      reasons.forEach((r, index) => {
+        const li = document.createElement("li");
+        li.textContent = r;
+        li.addEventListener("click", () => {
+          jumpToReason(index);
+          reasonCard.scrollIntoView({ behavior: "smooth" });
+        });
+        listEl.appendChild(li);
+      });
+    }
+
+    reasonCard.addEventListener("click", () => {
+      showNextReason();
+    });
+
+    scrollListBtn.addEventListener("click", () => {
+      fullListSection.scrollIntoView({ behavior: "smooth" });
+    });
+
+    restartBtn.addEventListener("click", () => {
+      currentIndex = -1;
+      reasonTextEl.textContent = "Tap anywhere on this card to see the first reason. ✨";
+      reasonCounterEl.textContent = "Ready?";
+      tapOverlayEl.innerHTML = '<span class="emoji">👆</span> Every tap = one more reason I love you.';
+      hideCelebration();
+      reasonCard.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Initialize
+    populateList();
+  </script>
+</body>
+</html>
